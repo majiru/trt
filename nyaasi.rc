@@ -1,0 +1,14 @@
+#!/usr/bin/env rc
+
+fn createRSSLink {
+	params=()
+	for(i in $*)
+		params=($params $i'+')
+
+	formatted=`{echo $"params | sed 's/+$//'}
+	echo 'https://nyaa.si/?page=rss&q='$formatted'&c=0_0&f=0'
+}
+
+#NOTE: This is still at the whim of the filter.txt file
+for(i in `{>[2]/dev/null curl `{createRSSLink $*} | trt})
+	transmission-remote -a $i	
