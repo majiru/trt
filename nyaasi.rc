@@ -5,8 +5,8 @@ fn createRSSLink {
 	for(i in $*)
 		params=($params $i'+')
 
-	formatted=`{echo $"params | sed 's/+$//'}
-	echo 'https://nyaa.si/?page=rss&q='$formatted'&c=0_0&f=0'
+	formatted=`{echo $"params | sed 's/+$//' | sed 's/ //g'}
+	echo 'https://nyaa.si/?page=rss&q='$"formatted'&c=0_0&f=0'
 }
 
 #NOTE: This is still at the whim of the filter.txt file
